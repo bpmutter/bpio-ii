@@ -1,41 +1,38 @@
 import React from 'react'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
+import { graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
 
-class RootIndex extends React.Component {
-  render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
-    const [author] = get(this, 'props.data.allContentfulPerson.edges')
+function Home() {
+  const data = useStaticQuery(pageQuery)
+  console.log(data)
+  const person = data.allContentfulPerson.edges[0].node
+  const heroImg = data.file.childImageSharp.fixed
 
-    return (
-      <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
-          <Helmet title={siteTitle} />
-          <Hero data={author.node} />
-          <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
-            <ul className="article-list">
-              {posts.map(({ node }) => {
-                return (
-                  <li key={node.slug}>
-                    <ArticlePreview article={node} />
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+  return (
+    <Layout title={'Home'}>
+      <div style={{ background: '#fff' }}>
+        <Hero person={person} heroImg={heroImg} />
+        <div className="wrapper">
+          <h2 className="section-headline">Recent Ramblings</h2>
+          {/* <ul className="article-list">
+            {posts.map(({ node }) => {
+              return (
+                <li key={node.slug}>
+                  <ArticlePreview article={node} />
+                </li>
+              )
+            })}
+          </ul> */}
         </div>
-      </Layout>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
 
-export default RootIndex
+export default Home
 
 export const pageQuery = graphql`
   query HomeQuery {
@@ -64,24 +61,26 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulPerson(
-      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
-    ) {
+    file(relativePath: { eq: "internet-love.png" }) {
+      childImageSharp {
+        fixed(width: 500, height: 500) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    allContentfulPerson {
       edges {
         node {
+          company
+          email
           name
-          shortBio {
-            shortBio
-          }
+          phone
           title
-          heroImage: image {
-            fluid(
-              maxWidth: 1180
-              maxHeight: 480
-              resizingBehavior: PAD
-              background: "rgb:000000"
-            ) {
-              ...GatsbyContentfulFluid_tracedSVG
+          twitter
+          github
+          childContentfulPersonShortBioTextNode {
+            childMarkdownRemark {
+              html
             }
           }
         }

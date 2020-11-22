@@ -1,7 +1,4 @@
 .hero {
-  position: relative;
-  background: #000;
-  color: #fff;
   text-align: center;
 }
 
@@ -10,27 +7,22 @@
     Ensure golden ratio for the hero size while limiting it to some extend to
     the viewport width
   */
-  height: 61.8vh;
-  max-height: 400px;
 }
 
-.heroDetails {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.7);
-  left: 50%;
+.heroDescription {
   bottom: 0;
-  transform: translate(-50%, 0);
-  font-size: 14px;
-  padding: 0 0.5em;
+  padding: 0 2em;
+  text-align: left;
+  font-size: 1em;
 }
 
-@media(min-width: 600px) {
+@media (min-width: 600px) {
   .heroDetails {
     font-size: 16px;
   }
 }
 
-@media(min-width: 1000px) {
+@media (min-width: 1000px) {
   .heroDetails {
     font-size: 20px;
   }
