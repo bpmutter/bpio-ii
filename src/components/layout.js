@@ -4,6 +4,7 @@ import base from './base.css'
 import Container from './container'
 import Navigation from './navigation'
 import Meta from './meta'
+import Footer from './footer'
 
 function Layout({ children, title }) {
   return (
@@ -11,6 +12,7 @@ function Layout({ children, title }) {
       <Meta title={title} />
       <Navigation />
       <main>{children}</main>
+      <Footer />
     </Container>
   )
 }

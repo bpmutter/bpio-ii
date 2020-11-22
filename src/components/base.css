@@ -17,6 +17,8 @@ body {
 main {
   max-width: 950px;
   margin: 0 auto;
+  padding: 1em;
+  background-color: white;
 }
 
 img {
@@ -24,11 +26,15 @@ img {
   width: 100%;
 }
 
-h1,
-h2,
-h3 {
+h1 {
   font-size: 2em;
   font-weight: normal;
+}
+h2 {
+  font-size: 1.75em;
+}
+h3 {
+  font-size: 1.5em;
 }
 
 a {
@@ -36,7 +42,7 @@ a {
 }
 
 .wrapper {
-  width: calc(100% - 10vmin);
+  /* width: calc(100% - 10vmin); */
   margin: 0 auto;
   padding: 5vmin 0;
 }
@@ -56,11 +62,6 @@ a {
 /**
  *
  */
-.section-headline {
-  padding: 0 0 0.4em 0;
-  margin: 0 0 5vmin 0;
-  border-bottom: 1px solid #ddd;
-}
 
 /**
  *

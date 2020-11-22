@@ -6,7 +6,11 @@
   margin: 0;
   height: 20vh;
   max-height: 100px;
+  max-width: none;
   font-size: 1.25em;
+  background-color: white;
+  margin-bottom: 2em;
+  border-bottom: 1px solid lightgray;
 }
 
 .navigationItem {

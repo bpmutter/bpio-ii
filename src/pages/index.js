@@ -4,19 +4,25 @@ import { Helmet } from 'react-helmet'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
+import Section from '../templates/section'
+import Technologies from '../components/technologies'
 
 function Home() {
   const data = useStaticQuery(pageQuery)
   console.log(data)
   const person = data.allContentfulPerson.edges[0].node
   const heroImg = data.file.childImageSharp.fixed
+  const technologies = data.allContentfulTechnology.edges
 
   return (
     <Layout title={'Home'}>
       <div style={{ background: '#fff' }}>
         <Hero person={person} heroImg={heroImg} />
-        <div className="wrapper">
-          <h2 className="section-headline">Recent Ramblings</h2>
+        <Technologies
+          techs={technologies.slice(0, technologies.length / 2)}
+        ></Technologies>
+        <Section title="Projects"></Section>
+        <Section title="Recent Ramblings">
           {/* <ul className="article-list">
             {posts.map(({ node }) => {
               return (
@@ -26,7 +32,7 @@ function Home() {
               )
             })}
           </ul> */}
-        </div>
+        </Section>
       </div>
     </Layout>
   )
@@ -81,6 +87,18 @@ export const pageQuery = graphql`
           childContentfulPersonShortBioTextNode {
             childMarkdownRemark {
               html
+            }
+          }
+        }
+      }
+    }
+    allContentfulTechnology {
+      edges {
+        node {
+          technologies
+          image {
+            fixed(width: 100) {
+              ...GatsbyContentfulFixed
             }
           }
         }
