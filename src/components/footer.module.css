@@ -1,0 +1,40 @@
+.wrapper {
+  background-color: white;
+  margin-top: 2em;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.wrapper div {
+  display: inline-block;
+  padding: 0.5em 1em;
+}
+
+.name {
+  padding: 0 auto 0.25em;
+}
+
+.socialIcons div {
+  display: block;
+}
+.icon {
+  position: relative;
+  top: 5px;
+  font-size: 1.25em;
+  padding-right: 0.25em;
+}
+
+.siteDescription {
+  align-self: flex-start;
+  text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
