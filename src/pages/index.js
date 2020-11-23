@@ -10,7 +10,6 @@ import BitmojiDivider from '../components/bitmoji-divider'
 
 function Home() {
   const data = useStaticQuery(pageQuery)
-  console.log(data)
   const person = data.allContentfulPerson.edges[0].node
   const heroImg = data.file.childImageSharp.fixed
   const technologies = data.allContentfulTechnology.edges
