@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
 import Section from '../templates/section'
 import Technologies from '../components/technologies'
+import BitmojiDivider from '../components/bitmoji-divider'
 
 function Home() {
   const data = useStaticQuery(pageQuery)
@@ -18,10 +19,13 @@ function Home() {
     <Layout title={'Home'}>
       <div style={{ background: '#fff' }}>
         <Hero person={person} heroImg={heroImg} />
+        <BitmojiDivider />
         <Technologies
           techs={technologies.slice(0, technologies.length / 2)}
         ></Technologies>
+        <BitmojiDivider />
         <Section title="Projects"></Section>
+        <BitmojiDivider />
         <Section title="Recent Ramblings">
           {/* <ul className="article-list">
             {posts.map(({ node }) => {
