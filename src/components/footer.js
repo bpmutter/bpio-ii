@@ -1,21 +1,10 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import styles from './footer.module.css'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
-export default function Footer() {
-  const data = useStaticQuery(query)
-  const {
-    email,
-    github,
-    linkedIn,
-    twitter,
-    name,
-  } = data.allContentfulPerson.edges[0].node
-  const {
-    baseUrl,
-    siteDescription,
-    siteName,
-  } = data.allContentfulSiteInformation.edges[0].node
+export default function Footer({ person, siteInfo }) {
+  console.log(siteInfo, person)
+  const { siteName, baseUrl, siteDescription } = siteInfo
+  const { name, github, linkedIn, twitter, email } = person
 
   return (
     <footer className={styles.wrapper}>
@@ -55,28 +44,3 @@ export default function Footer() {
     </footer>
   )
 }
-
-const query = graphql`
-  query FooterQuery {
-    allContentfulSiteInformation {
-      edges {
-        node {
-          baseUrl
-          siteDescription
-          siteName
-        }
-      }
-    }
-    allContentfulPerson {
-      edges {
-        node {
-          email
-          github
-          twitter
-          linkedIn
-          name
-        }
-      }
-    }
-  }
-`
