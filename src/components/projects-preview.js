@@ -11,23 +11,25 @@ function ProjectsPreview({ projects }) {
           project = project.node
           return (
             <div
-              class={styles.projectContainer}
+              className={styles.projectContainer}
               style={{
                 backgroundImage: `url(${project.primaryImage.file.url})`,
               }}
             >
-              <div class={styles.projectInfo}>
-                <h3 class={styles.projectTitle}>{project.name}</h3>
-                <p class={styles.projectDescription}>{project.description}</p>
-                <div class={styles.projectButtonContainer}>
+              <div className={styles.projectInfo}>
+                <h3 className={styles.projectTitle}>{project.name}</h3>
+                <p className={styles.projectDescription}>
+                  {project.description}
+                </p>
+                <div className={styles.projectButtonContainer}>
                   <a
-                    class={styles.projectLearnMoreButton}
+                    className={styles.projectLearnMoreButton}
                     href={`/projects#${project.name}`}
                   >
                     Learn More
                   </a>
                   <a
-                    class={styles.projectLearnMoreButton}
+                    className={styles.projectLearnMoreButton}
                     href={project.projectUrl}
                     target="_blank"
                   >
@@ -39,8 +41,8 @@ function ProjectsPreview({ projects }) {
           )
         })}
       </div>
-      <div class={styles.moreProjects}>
-        <a class={styles.projectLearnMoreButton} href="/projects">
+      <div className={styles.moreProjects}>
+        <a className={styles.projectLearnMoreButton} href="/projects">
           <span className={styles.moreProjectsButtonText}>More Projects</span>
         </a>
       </div>

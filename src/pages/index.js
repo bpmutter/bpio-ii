@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
@@ -15,7 +14,7 @@ function Home() {
   const heroImg = data.file.childImageSharp.fixed
   const technologies = data.allContentfulTechnology.edges
   const projects = data.allContentfulProject.edges
-
+  const posts = data.allContentfulBlogPost.edges
   return (
     <Layout title={'Home'}>
       <div>
@@ -26,7 +25,7 @@ function Home() {
         <ProjectsPreview projects={projects} />
         <BitmojiDivider />
         <Section title="Recent Ramblings">
-          {/* <ul className="article-list">
+          <ul className="article-list">
             {posts.map(({ node }) => {
               return (
                 <li key={node.slug}>
@@ -34,7 +33,7 @@ function Home() {
                 </li>
               )
             })}
-          </ul> */}
+          </ul>
         </Section>
       </div>
     </Layout>
