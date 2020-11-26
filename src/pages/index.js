@@ -11,7 +11,7 @@ import ProjectsPreview from '../components/projects-preview'
 function Home() {
   const data = useStaticQuery(pageQuery)
   const person = data.allContentfulPerson.edges[0].node
-  const heroImg = data.file.childImageSharp.fixed
+  const heroImg = data.file.childImageSharp.fluid
   const technologies = data.allContentfulTechnology.edges
   const projects = data.allContentfulProject.edges
   const posts = data.allContentfulBlogPost.edges
@@ -74,8 +74,16 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "internet-love.png" }) {
       childImageSharp {
-        fixed(width: 500, height: 500) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 400) {
+          aspectRatio
+          base64
+          originalImg
+          originalName
+          sizes
+          src
+          srcSet
+          srcWebp
+          tracedSVG
         }
       }
     }
