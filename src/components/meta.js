@@ -15,6 +15,7 @@ export default function Meta({
       <title>
         {title ? `${title} | ben.perlmutter.io` : 'ben.perlmutter.io'}
       </title>
+      <link rel="icon" href="/favicon.ico" />
       <meta
         property="og:site_name"
         content={title ? `${title} | ben.perlmutter.io` : 'ben.perlmutter.io'}

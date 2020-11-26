@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './footer.module.css'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 export default function Footer({ person, siteInfo }) {
-  console.log(siteInfo, person)
   const { siteName, baseUrl, siteDescription } = siteInfo
   const { name, github, linkedIn, twitter, email } = person
 
@@ -35,7 +34,6 @@ export default function Footer({ person, siteInfo }) {
           <a href={twitter} rel="noopener noreferrer">
             Twitter
           </a>
-          {console.log('twitter is', twitter)}
         </div>
       </div>
       <div className={styles.siteDescription}>

@@ -6,14 +6,10 @@ import styles from './technologies.module.css'
 
 export default function Technologies({ techs }) {
   techs = techs.sort((a, b) => {
-    const aCode = a.node.technologies.toLowerCase().charCodeAt(0)
-    const bCode = b.node.technologies.toLowerCase().charCodeAt(0)
-    console.log('a b codes', aCode, bCode)
     return a.node.technologies.toLowerCase() > b.node.technologies.toLowerCase()
       ? 1
       : -1
   })
-  // console.log('techs are...', techs)
   return (
     <Section title="Technologies">
       <p>
