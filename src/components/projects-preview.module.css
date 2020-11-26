@@ -1,0 +1,89 @@
+.projectsWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.projectContainer {
+  width: 225px;
+  height: 225px;
+  background-image: url(/assets/sad-icecream-ben.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+/* note: external expand is for when it's triggered by clicking on the img itself */
+.projectContainer:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+.projectInfo {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+  height: 50px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  color: #f5f5f5;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: height 0.2s linear;
+}
+.projectInfo:hover,
+.projectInfo:active {
+  height: 150px;
+}
+
+.projectTitle {
+  align-self: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.projectDescription {
+  font-size: 14px;
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+.projectLearnMoreButton {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  text-align: center;
+  color: #333 !important;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  margin-left: 0.5rem;
+  display: inline-block;
+  /* width: 80px; */
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+.projectLearnMoreBtn:hover {
+  text-decoration: none;
+  background-color: #333;
+  color: #f5f5f5 !important;
+}
+.demoButton {
+  width: 25%;
+}
+.moreProjects {
+  padding: 1.5em 1em 1em;
+
+  text-align: center;
+}
+.moreProjectsButtonText {
+  font-size: 18px;
+  font-weight: bolder;
+}

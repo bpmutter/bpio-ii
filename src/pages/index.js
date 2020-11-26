@@ -7,23 +7,23 @@ import ArticlePreview from '../components/article-preview'
 import Section from '../templates/section'
 import Technologies from '../components/technologies'
 import BitmojiDivider from '../components/bitmoji-divider'
+import ProjectsPreview from '../components/projects-preview'
 
 function Home() {
   const data = useStaticQuery(pageQuery)
   const person = data.allContentfulPerson.edges[0].node
   const heroImg = data.file.childImageSharp.fixed
   const technologies = data.allContentfulTechnology.edges
+  const projects = data.allContentfulProject.edges
 
   return (
     <Layout title={'Home'}>
-      <div style={{ background: '#fff' }}>
+      <div>
         <Hero person={person} heroImg={heroImg} />
         <BitmojiDivider />
-        <Technologies
-          techs={technologies.slice(0, technologies.length / 2)}
-        ></Technologies>
+        <Technologies techs={technologies}></Technologies>
         <BitmojiDivider />
-        <Section title="Projects"></Section>
+        <ProjectsPreview projects={projects} />
         <BitmojiDivider />
         <Section title="Recent Ramblings">
           {/* <ul className="article-list">
@@ -50,7 +50,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulBlogPost(
+      sort: { fields: [publishDate], order: DESC }
+      filter: { node_locale: { eq: "en-US" } }
+    ) {
       edges {
         node {
           title
@@ -77,7 +80,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulPerson {
+    allContentfulPerson(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
           company
@@ -95,13 +98,31 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulTechnology {
+    allContentfulTechnology(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
           technologies
           image {
             fixed(width: 100) {
               ...GatsbyContentfulFixed
+            }
+          }
+        }
+      }
+    }
+    allContentfulProject(
+      limit: 3
+      sort: { order: DESC, fields: publishedDate }
+      filter: { node_locale: { eq: "en-US" } }
+    ) {
+      edges {
+        node {
+          description
+          projectUrl
+          name
+          primaryImage {
+            file {
+              url
             }
           }
         }
