@@ -19,7 +19,7 @@ export default function Hero({ person, heroImg }) {
         className={styles.heroImage}
         alt="Ben Internet Love Bitmoji"
         fluid={heroImg}
-        style={{ maxWidth: 400, margin: '1em auto' }}
+        style={{ maxWidth: 325, margin: '1em auto' }}
       />
       <div className={styles.heroDetails}>
         <h3 className={styles.heroHeadline}>{name}</h3>

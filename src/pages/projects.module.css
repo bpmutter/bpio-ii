@@ -1,0 +1,88 @@
+.project {
+  padding-top: 1rem;
+}
+.projectHeader {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projectContent {
+  display: grid;
+  grid-template-columns: 2fr 0.2fr 1fr;
+  margin-bottom: 0.5rem;
+}
+
+.projectDescription {
+  grid-column: 1/2;
+}
+
+.projectButton {
+  width: 100px;
+  display: block;
+  margin: 0 auto 0.5rem;
+  font-size: 1rem;
+}
+
+.projectImgWrapper {
+  grid-column: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: center;
+  font-size: 12px;
+}
+
+.projectImgWrapper p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.projectImg {
+  background-image: url(/assets/sad-icecream-ben.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 225px;
+  height: 175px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+  margin: 0.5rem 0;
+  /* cursor: pointer; */
+  transition: width 0.5s linear, height 0.5s linear;
+}
+/* .projectImg:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+} */
+
+.projectDemoActive:hover {
+  transform: none;
+}
+
+.projectTechnologiesUsed {
+  margin-bottom: 0.5rem;
+}
+
+.projectTechnology {
+  display: inline-block;
+  font-size: 14px;
+  border-left: 1px solid #d3d3d3;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  margin: 0 0.2rem 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .projectHeader {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+  .projectContent {
+    display: block;
+  }
+}
