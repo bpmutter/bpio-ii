@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Serif:ital@0;1&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @font-face {
   font-family: 'Avenir';
   font-weight: 400;
@@ -7,7 +9,7 @@
 }
 
 body {
-  font-family: 'Avenir', Tahoma, Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   line-height: 1.65;
   color: #373f49;
@@ -36,7 +38,15 @@ h2 {
 h3 {
   font-size: 1.5em;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: 'IBM Plex Mono', monospace;
+}
 a {
   color: currentColor;
 }

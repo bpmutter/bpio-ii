@@ -2,6 +2,7 @@ import React from 'react'
 import Section from '../templates/section'
 import PropTypes from 'prop-types'
 import styles from './projects-preview.module.css'
+import Button from './button'
 
 function ProjectsPreview({ projects }) {
   return (
@@ -22,19 +23,13 @@ function ProjectsPreview({ projects }) {
                   {project.description}
                 </p>
                 <div className={styles.projectButtonContainer}>
-                  <a
-                    className={styles.projectLearnMoreButton}
-                    href={`/projects#${project.name}`}
-                  >
-                    Learn More
-                  </a>
-                  <a
-                    className={styles.projectLearnMoreButton}
-                    href={project.projectUrl}
+                  <Button href={`/projects#${project.name}`}>Learn More</Button>
+                  <Button
+                    href={`/projects#${project.projectUrl}`}
                     target="_blank"
                   >
                     Demo
-                  </a>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -42,9 +37,12 @@ function ProjectsPreview({ projects }) {
         })}
       </div>
       <div className={styles.moreProjects}>
-        <a className={styles.projectLearnMoreButton} href="/projects">
+        {/* <a className={styles.projectLearnMoreButton} href="/projects">
           <span className={styles.moreProjectsButtonText}>More Projects</span>
-        </a>
+        </a> */}
+        <Button href="/projects" fontSize={20}>
+          More Projects
+        </Button>
       </div>
     </Section>
   )
