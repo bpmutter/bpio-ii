@@ -1,9 +1,7 @@
 .navigation {
   display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  justify-content: space-between;
+  align-items: center;
   height: 20vh;
   max-height: 100px;
   max-width: none;
@@ -11,6 +9,34 @@
   background-color: white;
   margin-bottom: 2em;
   border-bottom: 1px solid lightgray;
+  padding: 0 1em;
+}
+.navigation a {
+  text-decoration: none;
+}
+.navigation a:hover {
+  text-decoration: underline;
+}
+.leftNavigation {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+.bitmoji {
+  width: 52px;
+  height: 60px;
+}
+.leftNavigation h2 {
+  margin: 0;
+  padding: 10px 0;
+}
+.rightNavigation {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .navigationItem {
@@ -21,4 +47,44 @@
 
 .navigationItem a {
   color: currentColor;
+}
+.mobileMenuContainer {
+  display: none;
+}
+.mobileNavHamburgerWrapper {
+  display: none;
+}
+
+@media screen and (max-width: 850px) {
+  .rightNavigation {
+    display: none;
+  }
+  .mobileNavHamburgerWrapper {
+    display: inline-block;
+  }
+  .mobileNavHamburger {
+    display: inline-block;
+  }
+  .mobileMenuContainer {
+    display: block;
+    text-align: left;
+    position: absolute;
+    top: 90px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+  .mobileNav {
+    background-color: white;
+    padding: 0.5em 2em;
+    position: absolute;
+    right: 15px;
+    border: 1px solid lightgray;
+    z-index: 3;
+  }
+  .mobileNavItem {
+    list-style: none;
+    padding: 0.35em 0;
+  }
 }
