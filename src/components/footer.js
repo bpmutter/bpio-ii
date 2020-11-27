@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './footer.module.css'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import bitmojiWorkingDesk from '../images/bitmoji-working-desk.png'
+
 export default function Footer({ person, siteInfo }) {
   const { siteName, baseUrl, siteDescription } = siteInfo
   const { name, github, linkedIn, twitter, email } = person
@@ -38,6 +40,11 @@ export default function Footer({ person, siteInfo }) {
       </div>
       <div className={styles.siteDescription}>
         <p>{siteDescription}</p>
+        <img
+          src={bitmojiWorkingDesk}
+          alt="Bitmoji working desk"
+          className={styles.bitmojiFooter}
+        />
       </div>
     </footer>
   )
