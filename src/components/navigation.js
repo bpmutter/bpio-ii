@@ -15,7 +15,11 @@ export default function Navigation() {
   return (
     <nav role="navigation" className={styles.navigation}>
       <link href={burgers} rel="stylesheet"></link>
-      <div onMouseEnter={toggleSmileBitmoji} onMouseLeave={toggleSmileBitmoji}>
+      <div
+        onMouseEnter={() => setSmileBitmoji(true)}
+        onMouseLeave={() => setSmileBitmoji(false)}
+        onClick={() => setSmileBitmoji(true)}
+      >
         <Link to="/" className={styles.leftNavigation}>
           <img
             src={smileBitmoji ? bitmojibigSmile : bitmojiNeutral}
