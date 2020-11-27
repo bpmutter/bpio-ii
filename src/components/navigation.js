@@ -22,7 +22,7 @@ export default function Navigation() {
             alt="nav bitmoji"
             className={styles.bitmoji}
           />
-          <h2>ben.perlmutter</h2>
+          <h2 className={styles.title}>ben.perlmutter</h2>
         </Link>
       </div>
       <div className={styles.secondaryNav}>

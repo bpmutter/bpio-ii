@@ -20,6 +20,7 @@
 .leftNavigation {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 0;
   padding: 0;
 }
@@ -56,10 +57,21 @@
 }
 
 @media screen and (max-width: 850px) {
+  .navigation {
+    padding: 0 0.25em;
+  }
+  .title {
+    font-size: 22px;
+    /* padding-top: 15px; */
+    vertical-align: middle;
+    padding: 0;
+    padding-top: 10px;
+  }
   .rightNavigation {
     display: none;
   }
   .mobileNavHamburgerWrapper {
+    padding-top: 15px;
     display: inline-block;
   }
   .mobileNavHamburger {
