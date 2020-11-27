@@ -8,8 +8,8 @@
 * [ ] better style code blocks 
 * [ ] add popup gif/video for projects
 * [ ] link project blog posts and have button be present if applicable
-* [ ] change styling on 'web developer & technical writer' to make more subtle
-* [ ] add box shadow to main layout
+* [x] change styling on 'web developer & technical writer' to make more subtle
+* [x] add box shadow to main layout
 * [ ] transfer domain
 
 

@@ -28,9 +28,11 @@
   width: 52px;
   height: 60px;
 }
-.leftNavigation h2 {
+.title {
   margin: 0;
-  padding: 10px 0;
+  padding: 0;
+  position: relative;
+  top: 7px;
 }
 .rightNavigation {
   display: flex;
@@ -65,7 +67,6 @@
     /* padding-top: 15px; */
     vertical-align: middle;
     padding: 0;
-    padding-top: 10px;
   }
   .rightNavigation {
     display: none;

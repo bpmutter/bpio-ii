@@ -21,7 +21,15 @@ function Layout({ children, title }) {
         twitter={person.twitter}
       />
       <Navigation />
-      <main style={{ padding: '1em 2em' }}>{children}</main>
+      <main
+        style={{
+          padding: '1em 2em',
+          boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
+          borderRadius: '.15em',
+        }}
+      >
+        {children}
+      </main>
       <Footer person={person} siteInfo={siteInfo} />
     </Container>
   )
