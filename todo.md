@@ -1,9 +1,9 @@
 ## project todo list 
 * [x] add font stylings
 * [x] make better button component 
-* [ ] check mobile optimize
+* [x] check mobile optimize
   * [x] mobile nav title smaller 
-  * [ ] mobile button min height ... 40px? 
+  * [x] mobile button min height ... 40px? 
   * [x] link to technology wishlist...actially just remove that..i don't wanna keep updating
 * [ ] better style code blocks 
 * [ ] add popup gif/video for projects
