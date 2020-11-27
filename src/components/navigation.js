@@ -2,19 +2,23 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styles from './navigation.module.css'
 import bitmojiNeutral from '../images/bitmoji-neutral.png'
+import bitmojibigSmile from '../images/bitmoji-big-smile.png'
 import Hamburger from 'react-hamburgers'
 import burgers from './hamburgers.css'
 
 export default function Navigation() {
   const [activeMobileMenu, setActiveMobileMenu] = React.useState(false)
+  const [smileBitmoji, setSmileBitmoji] = React.useState(false)
+
+  const toggleSmileBitmoji = () => setSmileBitmoji(!smileBitmoji)
 
   return (
     <nav role="navigation" className={styles.navigation}>
       <link href={burgers} rel="stylesheet"></link>
-      <div>
+      <div onMouseEnter={toggleSmileBitmoji} onMouseLeave={toggleSmileBitmoji}>
         <Link to="/" className={styles.leftNavigation}>
           <img
-            src={bitmojiNeutral}
+            src={smileBitmoji ? bitmojibigSmile : bitmojiNeutral}
             alt="nav bitmoji"
             className={styles.bitmoji}
           />
