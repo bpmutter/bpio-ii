@@ -4,7 +4,7 @@
 * [ ] check mobile optimize
   * [x] mobile nav title smaller 
   * [ ] mobile button min height ... 40px? 
-  * [ ] link to technology wishlist...actially just remove that..i don't wanna keep updating
+  * [x] link to technology wishlist...actially just remove that..i don't wanna keep updating
 * [ ] better style code blocks 
 * [ ] add popup gif/video for projects
 * [ ] link project blog posts and have button be present if applicable

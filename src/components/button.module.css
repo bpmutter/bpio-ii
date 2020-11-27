@@ -14,6 +14,7 @@
   cursor: pointer;
   border-radius: 0.25rem;
   font-family: 'IBM Plex Mono', monospace;
+  min-height: fit-content;
 }
 .button:hover {
   text-decoration: none;
