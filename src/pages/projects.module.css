@@ -77,6 +77,10 @@
   margin: 0 0.2rem 0.5rem;
 }
 
+.projectBlogButtonWrapper {
+  display: flex;
+  justify-content: center;
+}
 @media screen and (max-width: 600px) {
   .projectHeader {
     flex-direction: column;
@@ -84,5 +88,8 @@
   }
   .projectContent {
     display: block;
+  }
+  .projectBlogButtonWrapper {
+    margin-bottom: 2em;
   }
 }

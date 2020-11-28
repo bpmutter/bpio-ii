@@ -3,7 +3,7 @@ import StaticPage from '../templates/static-page'
 import styles from './projects.module.css'
 import { useStaticQuery, graphql } from 'gatsby'
 import BitmojiDivider from '../components/bitmoji-divider'
-
+import Button from '../components/button'
 export default function About() {
   const data = useStaticQuery(query)
   console.log('data is...', data)
@@ -51,6 +51,13 @@ export default function About() {
                       })}
                     </ul>
                   </div>
+                  {project.blogPost && project.blogPost.slug && (
+                    <div className={styles.projectBlogButtonWrapper}>
+                      <Button href={`/blog/${project.blogPost.slug}`}>
+                        Read Blog Post
+                      </Button>
+                    </div>
+                  )}
                 </div>
                 <div className={styles.projectImgWrapper}>
                   {console.log('project url', project.primaryImage.file.url)}
@@ -114,6 +121,9 @@ const query = graphql`
           }
           technologies
           publishedDate
+          blogPost {
+            slug
+          }
         }
       }
     }
