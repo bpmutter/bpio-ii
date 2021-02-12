@@ -6,7 +6,7 @@ import Button from './button'
 
 function ProjectsPreview({ projects }) {
   return (
-    <Section name="Projects">
+    <Section title="Projects">
       <div className={styles.projectsWrapper}>
         {projects.map((project) => {
           project = project.node
@@ -16,6 +16,7 @@ function ProjectsPreview({ projects }) {
               style={{
                 backgroundImage: `url(${project.primaryImage.file.url})`,
               }}
+              key={project.name}
             >
               <div className={styles.projectInfo}>
                 <h3 className={styles.projectTitle}>{project.name}</h3>
@@ -24,10 +25,7 @@ function ProjectsPreview({ projects }) {
                 </p>
                 <div className={styles.projectButtonContainer}>
                   <Button href={`/projects#${project.name}`}>Learn More</Button>
-                  <Button
-                    href={`${project.projectUrl}`}
-                    target="_blank"
-                  >
+                  <Button href={`${project.projectUrl}`} target="_blank">
                     Demo
                   </Button>
                 </div>
