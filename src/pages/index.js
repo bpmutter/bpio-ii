@@ -7,18 +7,22 @@ import Section from '../templates/section'
 import Technologies from '../components/technologies'
 import BitmojiDivider from '../components/bitmoji-divider'
 import ProjectsPreview from '../components/projects-preview'
+import CoreCompetencies from '../components/core-competencies'
 
 function Home() {
   const data = useStaticQuery(pageQuery)
   const person = data.allContentfulPerson.edges[0].node
   const heroImg = data.file.childImageSharp.fluid
   const technologies = data.allContentfulTechnology.edges
+  const skills = data.allContentfulSkill.edges
   const projects = data.allContentfulProject.edges
   const posts = data.allContentfulBlogPost.edges
   return (
     <Layout title={'Home'}>
       <div>
         <Hero person={person} heroImg={heroImg} />
+        <BitmojiDivider />
+        <CoreCompetencies skills={skills} />
         <BitmojiDivider />
         <Technologies techs={technologies}></Technologies>
         <BitmojiDivider />
@@ -100,6 +104,18 @@ export const pageQuery = graphql`
           childContentfulPersonShortBioTextNode {
             childMarkdownRemark {
               html
+            }
+          }
+        }
+      }
+    }
+    allContentfulSkill(filter: { node_locale: { eq: "en-US" } }) {
+      edges {
+        node {
+          name
+          media {
+            fixed(width: 175) {
+              ...GatsbyContentfulFixed
             }
           }
         }

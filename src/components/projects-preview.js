@@ -35,9 +35,6 @@ function ProjectsPreview({ projects }) {
         })}
       </div>
       <div className={styles.moreProjects}>
-        {/* <a className={styles.projectLearnMoreButton} href="/projects">
-          <span className={styles.moreProjectsButtonText}>More Projects</span>
-        </a> */}
         <Button href="/projects" fontSize={20}>
           More Projects
         </Button>
