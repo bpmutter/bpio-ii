@@ -26,7 +26,7 @@ function ProjectsPreview({ projects }) {
                 <div className={styles.projectButtonContainer}>
                   <Button href={`/projects#${project.name}`}>Learn More</Button>
                   <Button href={`${project.projectUrl}`} target="_blank">
-                    Demo
+                    Live Site
                   </Button>
                 </div>
               </div>
