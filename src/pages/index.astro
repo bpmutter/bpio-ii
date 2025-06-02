@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Card from "@/components/Card.astro";
+import Hr from "@/components/Hr.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { SITE } from "@/config";
+import { CORE_COMPETENCIES, SOCIALS } from "@/constants";
+import { Image } from "astro:assets";
+import benImage from "@/assets/images/ben-cropped.png";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+
+function randomOrder<T>(arr: T[]) {
+  return arr.sort(() => Math.random() - 0.5);
+}
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <div class="flex justify-center">
+        <Image
+          src={benImage}
+          alt="Ben Perlmutter"
+          class="mb-4 h-75 w-75 rounded-full"
+        />
+      </div>
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+        Ben Perlmutter
+      </h1>
+
+      <p>
+        I'm an AI engineer and technical writer. I work at the intersection of
+        content and code.
+      </p>
+      {
+        // only display if at least one social link is enabled
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+
+    <Hr />
+
+    <section id="core-competencies" class="pt-12 pb-6">
+      <h2 class="mb-6 text-2xl font-semibold tracking-wide">
+        Core Competencies
+      </h2>
+      <div class="flex flex-row flex-wrap items-start justify-between gap-4">
+        {
+          randomOrder(CORE_COMPETENCIES).map(coreCompetency => (
+            <div class="flex min-w-[150px] flex-1 flex-col items-center p-2 text-center">
+              <Image
+                src={coreCompetency.image}
+                alt={coreCompetency.name}
+                class="mb-4 h-30 w-30 rounded-full object-cover"
+              />
+              <h3 class="text-lg font-semibold">{coreCompetency.name}</h3>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <Hr />
+
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured" class="pt-12 pb-6">
+            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+            <ul>
+              {featuredPosts.map(data => (
+                <Card variant="h3" {...data} />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Hr />}
+        </>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Recent Ramblings</h2>
+          <ul>
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="my-8 text-center">
+      <LinkButton href="/posts/">
+        All Posts
+        <IconArrowRight class="inline-block" />
+      </LinkButton>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>
