@@ -1,20 +1,20 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import { SITE } from "@/config";
-import "@fontsource/yuji-syuku";
-import "@/styles/global.css";
-const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+import { ClientRouter } from 'astro:transitions'
+import { SITE } from '@/config'
+import '@fontsource/yuji-syuku'
+import '@/styles/global.css'
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION
 
 export interface Props {
-  title?: string;
-  author?: string;
-  profile?: string;
-  description?: string;
-  ogImage?: string;
-  canonicalURL?: string;
-  pubDatetime?: Date;
-  modDatetime?: Date | null;
-  scrollSmooth?: boolean;
+  title?: string
+  author?: string
+  profile?: string
+  description?: string
+  ogImage?: string
+  canonicalURL?: string
+  pubDatetime?: Date
+  modDatetime?: Date | null
+  scrollSmooth?: boolean
 }
 
 const {
@@ -22,38 +22,38 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
+  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : '/og.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
-} = Astro.props;
+} = Astro.props
 
-const socialImageURL = new URL(ogImage, Astro.url);
+const socialImageURL = new URL(ogImage, Astro.url)
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
   headline: `${title}`,
   image: `${socialImageURL}`,
   datePublished: `${pubDatetime?.toISOString()}`,
   ...(modDatetime && { dateModified: modDatetime.toISOString() }),
   author: [
     {
-      "@type": "Person",
+      '@type': 'Person',
       name: `${author}`,
       ...(profile && { url: profile }),
     },
   ],
-};
+}
 ---
 
 <!doctype html>
-<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && "scroll-smooth"}`}>
+<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && 'scroll-smooth'}`}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -108,7 +108,7 @@ const structuredData = {
       rel="alternate"
       type="application/rss+xml"
       title={SITE.title}
-      href={new URL("rss.xml", Astro.site)}
+      href={new URL('rss.xml', Astro.site)}
     />
 
     <meta name="theme-color" content="" />
