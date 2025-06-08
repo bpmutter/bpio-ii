@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ben.perlmutter.io/sitemap-index.xml
