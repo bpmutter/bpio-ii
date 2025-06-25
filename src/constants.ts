@@ -110,3 +110,10 @@ export const CORE_COMPETENCIES: CoreCompetency[] = [
     image: TechnicalWriting,
   },
 ]
+
+export const ABOUT_ME = {
+  name: 'Ben Perlmutter',
+  title: 'Senior Software Engineer at MongoDB',
+  overview:
+    "I'm an AI engineer and technical writer. I work at the intersection of content and code.",
+}
