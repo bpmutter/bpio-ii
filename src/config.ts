@@ -1,3 +1,5 @@
+export const GITHUB_REPO = 'https://github.com/bpmutter/bpio-ii'
+
 export const SITE = {
   website: 'https://ben.perlmutter.io/', // replace this with your deployed domain
   author: 'Ben Perlmutter',
@@ -14,7 +16,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: 'Suggest Changes',
-    url: 'https://github.com/bpmutter/bpio-ii/edit/master/',
+    url: `${GITHUB_REPO}/edit/master/`,
   },
   dynamicOgImage: true,
   lang: 'en', // html lang code. Set this empty and default will be "en"

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 import { getCollection } from 'astro:content'
-import { SITE } from '@/config'
+import { GITHUB_REPO, SITE } from '@/config'
 import getSortedPosts from '@/utils/getSortedPosts'
 
 export const prerender = true
@@ -31,14 +31,11 @@ This website features Ben's blog posts on topics including generative AI, techni
   content += `
 ## Pages
 
-- [About](/about): Background information about Ben Perlmutter, his work at MongoDB, and previous experience in technical writing and content creation
-- [Blog](/posts): Complete list of blog posts with search functionality
-- [Tags](/tags): Browse blog posts by topic tags
-- [RSS Feed](/rss.xml): Subscribe to blog updates via RSS
+- [About](/about.md): Background information about Ben Perlmutter, his work at MongoDB, and previous experience in technical writing and content creation
 
 ## Optional
 
-- [GitHub Repository](https://github.com/bpmutter/bpio-ii): Source code for this website
+- [GitHub Repository](${GITHUB_REPO}): Source code for this website
 - [Professional Profile](${SITE.website}): Ben's professional profile and contact information
 `
 
