@@ -4,7 +4,7 @@ export const SITE = {
   profile: 'https://ben.perlmutter.io/',
   desc: "Ben Perlmutter's personal website.",
   title: 'Ben Perlmutter',
-  ogImage: 'astropaper-og.jpg',
+  ogImage: 'pencil-og.png',
   lightAndDarkMode: true,
   postPerIndex: 5,
   postPerPage: 10,

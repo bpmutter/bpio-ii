@@ -1,9 +1,11 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import { SITE } from "@/config";
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import LinkButton from '@/components/LinkButton.astro'
+import { SITE } from '@/config'
+import { Image } from 'astro:assets'
+import notFoundImage from '@/assets/images/404.png'
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
@@ -11,17 +13,24 @@ import { SITE } from "@/config";
 
   <main
     id="main-content"
-    class="mx-auto flex max-w-3xl flex-1 items-center justify-center"
+    class="mx-auto flex max-w-3xl flex-1 items-center justify-center px-4"
   >
-    <div class="mb-14 flex flex-col items-center justify-center">
-      <h1 class="text-9xl font-bold text-accent">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
+    <div class="mb-14 mt-16 flex flex-col items-center justify-center">
+      <div class="mb-6 w-full max-w-lg px-4">
+        <Image
+          src={notFoundImage}
+          alt="Lost hiker - 404 Not Found"
+          class="rounded-lg shadow-lg w-full h-auto object-contain"
+          format="webp"
+        />
+      </div>
+      <h1 class="text-7xl font-bold text-accent mb-2">Oops!</h1>
+      <p class="text-2xl sm:text-3xl mb-2">Looks like you're lost</p>
       <LinkButton
         href="/"
-        class="my-6 text-lg underline decoration-dashed underline-offset-8"
+        class="text-lg underline decoration-dashed underline-offset-8"
       >
-        Go back home
+        Take me home 🏠
       </LinkButton>
     </div>
   </main>
