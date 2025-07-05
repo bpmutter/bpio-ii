@@ -70,7 +70,11 @@ Interestingly, the highest-performing models were less sensitive to prompting va
 - Use agentic workflows for maximum performance (but at higher cost/latency)
 - Avoid interpreted JSON schemas (can confuse models)
 
+<div style="max-width: 700px;">
+
 ![prompting heatmap](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/u6uCqDEHXFz160WxHB3Kh.png)
+
+</div>
 
 ## Practical Recommendations
 
@@ -88,15 +92,27 @@ Based on these benchmark results, here are actionable recommendations for buildi
 The benchmark dataset consists of 766 test cases distributed across 8 [MongoDB Atlas sample databases](https://www.mongodb.com/docs/atlas/sample-data/).
 The dataset includes diverse query complexities and MongoDB operations.
 
+<div style="max-width: 500px;">
+
 ![distribution_by_dataset_name](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/UrMN2CF8rFvlGfBESwJAj.png)
 
+</div>
+
+<div style="max-width: 500px;">
+
 ![query_operator_counts](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/VDmbYgynp4VT3le-gMdCu.png)
+
+</div>
 
 ### Dataset Generation Pipeline
 
 Rather than manually creating the necessary hundreds of test cases, I built a scalable pipeline that programmatically generates natural language queries and their corresponding MongoDB queries.
 
+<div style="max-width: 700px;">
+
 ![tree-of-generation](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/T-L4HajV3aQfUE32YZZMl.png)
+
+</div>
 
 The generation process follows this flow:
 1. **User personas**: Generate diverse user types who might query the database
