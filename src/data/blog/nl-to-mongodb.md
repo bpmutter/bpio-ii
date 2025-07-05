@@ -11,13 +11,13 @@ tags:
 description: "Measuring how well LLMs can translate natural language to MongoDB queries."
 ---
 
-I recently worked on a project to measure how well LLMs can translate natural language queries to MongoDB queries. 
+I recently completed a project measuring how well large language models (LLMs) can translate natural language queries into MongoDB queries. 
 
 ## The Benchmark
 
-Over the past few months, I created a comprehensive benchmark to evaluate how different large language models perform at generating MongoDB Shell (mongosh) code from natural language queries. The benchmark consists of 766 test cases across 8 databases using the MongoDB Atlas sample datasets.
+Over spring 2025, I developed a benchmark to evaluate how different LLMs perform at generating MongoDB Shell (mongosh) code from natural language queries. The benchmark consists of 766 test cases across 8 databases using the MongoDB Atlas sample datasets.
 
-Here's what we evaluated:
+Here's what I evaluated:
 
 ### Models Evaluated
 
@@ -31,17 +31,20 @@ Here's what we evaluated:
 - Mistral Large 2
 - Amazon Nova Pro
 
+These models represented the state-of-the-art from major AI labs at time of benchmarking.
+
 ### Key Evaluation Metrics
 
 - **SuccessfulExecution**: Does the generated query run without errors?
 - **CorrectOutputFuzzy**: Does it return the right data?
-- **XMaNeR**: Our primary composite metric combining execution success, correctness, non-empty output, and reasonable results
+- **XMaNeR**: The primary composite metric combining execution success, correctness, non-empty output, and reasonable results
 
 ## Key Findings
 
 ### Model Performance Correlates with General Capabilities
 
-There's a strong correlation (R² = 0.615) between how well models perform on this MongoDB benchmark and their performance on general benchmarks like MMLU-Pro. This suggests that as models get better overall, they'll continue improving at MongoDB-specific tasks.
+The results show a strong correlation (R² = 0.615) between how well models perform on this MongoDB benchmark and their performance on general benchmarks like MMLU-Pro. 
+This suggests that as models get better overall, they'll continue improving at MongoDB-specific tasks.
 
 ![xmaner-vs-mmlu-pro](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/Tp0kHuIXa88mvQ0Q0DgwV.png)
 
@@ -55,13 +58,14 @@ There's a strong correlation (R² = 0.615) between how well models perform on th
 
 ### Prompting Strategy Matters (But Less for Better Models)
 
-Different prompting approaches yielded meaningfully different results. Interestingly, the highest-performing models were less sensitive to prompting variations - Claude 3.7 Sonnet had only a 5.86% range between best and worst experiments, while lower-performing models like Mistral Large 2 had an 18.72% range.
+Different prompting approaches produced meaningfully different results.
+Interestingly, the highest-performing models were less sensitive to prompting variations - Claude 3.7 Sonnet had only a 5.86% range between best and worst experiments, while lower-performing models like Mistral Large 2 had an 18.72% range.
 
 ![prompting avg vs range](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/iyuiQsFle_IsSolAmLMDP.png)
 
 ### Most Effective Prompting Strategies
 
-- Include annotated database schemas (huge positive impact)
+- Include annotated database schemas (significant positive impact)
 - Always provide sample documents from collections
 - Use agentic workflows for maximum performance (but at higher cost/latency)
 - Avoid interpreted JSON schemas (can confuse models)
@@ -70,19 +74,19 @@ Different prompting approaches yielded meaningfully different results. Interesti
 
 ## Practical Recommendations
 
-Based on the benchmark results, here are actionable takeaways for anyone building natural language to MongoDB query systems:
+Based on these benchmark results, here are actionable recommendations for building natural language to MongoDB query systems:
 
-1. **Use Claude 3.7 Sonnet if possible** - it consistently outperformed other models
-2. **Invest in annotated schemas** - describing what database fields mean meaningfully improves results
-3. **Always include sample documents** in your prompts if possible. Models understand these better than DB schemas.
-4. **Test different prompting strategies** for your specific model and use case
-5. **Consider the cost-performance trade-off** of agentic approaches
+1. **Invest in annotated schemas** - describing what database fields mean meaningfully improves results
+2. **Always include sample documents** in your prompts if possible. Models understand these better than programmatically generatedDB schemas.
+3. **Test different prompting strategies** for your specific model and use case
+4. **Consider the cost-performance trade-off** of agentic approaches
 
 ## Dataset
 
 ### Dataset Profile
 
-The benchmark dataset consists of 766 test cases distributed across 8 [MongoDB Atlas sample databases](https://www.mongodb.com/docs/atlas/sample-data/). The benchmark contains a diverse distribution of query complexities and operations.
+The benchmark dataset consists of 766 test cases distributed across 8 [MongoDB Atlas sample databases](https://www.mongodb.com/docs/atlas/sample-data/).
+The dataset includes diverse query complexities and MongoDB operations.
 
 ![distribution_by_dataset_name](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/UrMN2CF8rFvlGfBESwJAj.png)
 
@@ -90,7 +94,7 @@ The benchmark dataset consists of 766 test cases distributed across 8 [MongoDB A
 
 ### Dataset Generation Pipeline
 
-Rather than manually creating hundreds of test cases, I developed a scalable pipeline that generates natural language queries and their corresponding MongoDB queries programmatically.
+Rather than manually creating the necessary hundreds of test cases, I built a scalable pipeline that programmatically generates natural language queries and their corresponding MongoDB queries.
 
 ![tree-of-generation](https://cdn-uploads.huggingface.co/production/uploads/63a36e208c0c89dcae3c1172/T-L4HajV3aQfUE32YZZMl.png)
 
@@ -103,9 +107,11 @@ The generation process follows this flow:
 
 #### Advantages of This Approach
 
-1. **Scalable**: We can generate N users × M use cases × P natural language queries × O MongoDB queries, making it easy to scale from hundreds to thousands of test cases.
-2. **Flexible**: The process works with any MongoDB database - just point it at your collections and let it generate relevant queries.
-3. **Extensible**: We can intervene at any step to build targeted datasets for specific features or use cases.
+1. **Scalable**: Generate `N` users × `M` use cases × `P` natural language queries × `O` MongoDB queries.
+   For example, 8×8×8×8 = 4,096 test cases.
+2. **Flexible**: The process adapts to any MongoDB database. Simply point it at your collections.
+3. **Extensible**: Intervene at any step to create targeted datasets for specific features or use cases.
+   For example, in the NL query generation step, you could prompt it to only create timeseries-related queries.
 
 This approach creates a comprehensive benchmark that covers realistic query patterns while maintaining quality and relevance to actual MongoDB usage.
 
@@ -121,6 +127,8 @@ The benchmark generation pipeline and evaluation code can be found in the [Mongo
 
 ### MongoDB Documentation
 
-Based on these benchmark findings, the Docs team and I created new documentation that provides guidance for building natural language to MongoDB query systems. You can find the official documentation at [Natural Language to MongoDB Queries](https://www.mongodb.com/docs/manual/natural-language-to-mongodb/). This page includes practical prompting strategies and best practices derived from this research.
+Building on these benchmark findings, the MongoDB documentation team and I created new guidance for building natural language to MongoDB query systems.
+You can find the official documentation at [Natural Language to MongoDB Queries](https://www.mongodb.com/docs/manual/natural-language-to-mongodb/).
+This page includes practical prompting strategies and best practices derived from this research.
 
 The documentation covers optimal prompt components, example schemas, and implementation patterns that emerged from testing thousands of natural language to MongoDB query translations across different models and configurations.
