@@ -10,7 +10,7 @@ tags:
 description: "Exploring how knowledge resources have become the most powerful fuel for generative AI applications, from RAG chatbots to model training datasets."
 ---
 
-> *This post is based on a conference talk I gave at the AI Engineer World's Fair in June 2024. Find more details about the talk [here](./knowledge-is-the-new-uranium-talk.md).*
+> *This post is based on a conference talk I gave at the AI Engineer World's Fair in June 2024. Find more details about the talk [here](./knowledge-is-the-new-uranium-talk).*
 
 It's long been said that "data is the new oil". Data has become one of the most useful commodities driving the modern economy, like how oil fueled industry throughout the 20th century. Data, when properly refined, can provide insights and enable new technologies that create lots of value.
 
@@ -29,9 +29,9 @@ Some practical examples of knowledge resources include public and internal docum
 The rise of large language models (LLMs) and their ability to understand and reason over vast amounts of information has made knowledge an extraordinarily valuable asset in the generative AI era. LLMs can use knowledge resources to generate intelligent outputs, make decisions, take actions, and produce more knowledge resources.
 
 For many organizations, retrieval-augmented generation (RAG) chatbots have been the first generative AI use case to leverage their knowledge resources like documentation and code repositories.
-I've focused on the RAG chatbot space for the past year and change, working on projects like the [MongoDB Docs Chatbot](./taking-rag-to-production-with-the-mongodb-documentation-ai-chatbot.md) and the [MongoDB Chatbot Framework](./build-a-production-ready-intelligent-chatbot-with-the-mongodb-chatbot.md).
+I've focused on the RAG chatbot space for the past year and change, working on projects like the [MongoDB Docs Chatbot](./taking-rag-to-production-with-the-mongodb-documentation-ai-chatbot) and the [MongoDB Chatbot Framework](./build-a-production-ready-intelligent-chatbot-with-the-mongodb-chatbot).
 
-RAG chatbots are great, and [I think they'll continue to be important for the foreseeable future](./why-chat-is-the-best-interface-for-llms-for-now.md).  But knowledge resources can fuel so much more than just RAG chatbots.
+RAG chatbots are great, and [I think they'll continue to be important for the foreseeable future](./why-chat-is-the-best-interface-for-llms-for-now).  But knowledge resources can fuel so much more than just RAG chatbots.
 
 This blog post explores the currently possible use cases for knowledge resources, all of which we are currently doing at MongoDB, including:
 
@@ -65,9 +65,9 @@ Next, let's take a look at some ways that you can currently use your knowledge r
 
 ### More RAG Chatbots
 
-Chatbots seem to be the dominant interface for leveraging knowledge resources with generative AI at the moment. Chatbots are great for providing relatively high value for relatively low effort. In a previous blog post, [Why Chat is the Best Interface for LLMs (for now?)](./why-chat-is-the-best-interface-for-llms-for-now.md), I explored why I think chatbots work so well right now.
+Chatbots seem to be the dominant interface for leveraging knowledge resources with generative AI at the moment. Chatbots are great for providing relatively high value for relatively low effort. In a previous blog post, [Why Chat is the Best Interface for LLMs (for now?)](./why-chat-is-the-best-interface-for-llms-for-now), I explored why I think chatbots work so well right now.
 
-With the right chatbot infrastructure, you can probably drive 10s of percents of productivity gain in most knowledge work tasks by giving someone an AI chatbot using a GPT-4+ tier model with a good system prompt and knowledge retrieval system. At MongoDB, we've started using a tool called [Credal.ai](https://www.credal.ai/) for internal chatbot with promising initial results. [ChatGPT's custom GPTs](./exploring-custom-gpts.md) are another tool for quickly spinning up custom LLM chatbots.
+With the right chatbot infrastructure, you can probably drive 10s of percents of productivity gain in most knowledge work tasks by giving someone an AI chatbot using a GPT-4+ tier model with a good system prompt and knowledge retrieval system. At MongoDB, we've started using a tool called [Credal.ai](https://www.credal.ai/) for internal chatbot with promising initial results. [ChatGPT's custom GPTs](./exploring-custom-gpts) are another tool for quickly spinning up custom LLM chatbots.
 
 It doesn't really make sense to have a single centralized team create all the chatbots for an organization, given that:
 
