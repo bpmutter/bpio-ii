@@ -28,7 +28,8 @@ Some practical examples of knowledge resources include public and internal docum
 
 The rise of large language models (LLMs) and their ability to understand and reason over vast amounts of information has made knowledge an extraordinarily valuable asset in the generative AI era. LLMs can use knowledge resources to generate intelligent outputs, make decisions, take actions, and produce more knowledge resources.
 
-For many organizations,retrieval-augmented generation (RAG) chatbots have been the first generative AI use case to leverage their knowledge resources like documentation and code repositories. I've focused on for the past year and change on the RAG chatbot space, working on projects like the [MongoDB Docs Chatbot](./taking-rag-to-production-with-the-mongodb-documentation-ai-chatbot.md) and the [MongoDB Chatbot Framework](./build-a-production-ready-intelligent-chatbot-with-the-mongodb-chatbot.md).
+For many organizations, retrieval-augmented generation (RAG) chatbots have been the first generative AI use case to leverage their knowledge resources like documentation and code repositories.
+I've focused on the RAG chatbot space for the past year and change, working on projects like the [MongoDB Docs Chatbot](./taking-rag-to-production-with-the-mongodb-documentation-ai-chatbot.md) and the [MongoDB Chatbot Framework](./build-a-production-ready-intelligent-chatbot-with-the-mongodb-chatbot.md).
 
 RAG chatbots are great, and [I think they'll continue to be important for the foreseeable future](./why-chat-is-the-best-interface-for-llms-for-now.md).  But knowledge resources can fuel so much more than just RAG chatbots.
 
@@ -50,7 +51,7 @@ Knowledge likely exists in a variety of different forms across an organization -
 
 The ideal format allows models to make apples-to-apples comparisons and provides an easier way for humans to work with the data. For text data, this often means converting everything to a uniform markup format like markdown. For other media types like images, it could involve standardizing dimensions, file types, etc. The goal is to have all your knowledge resources normalized into a consistent data structure.
 
-We can also use LLMs to refine less "rawer" forms of knowledge. For example, you could use an LLM to condense a forum thread into a blog post on the topic. 
+We can also use LLMs to refine less structured forms of knowledge. For example, you could use an LLM to condense a forum thread into a blog post on the topic. 
 
 Once normalized, you can centralize the knowledge into a repository that serves as a single source of truth. Having a centralized knowledge base provides easy access for current use cases while future-proofing your resources as new AI capabilities and applications emerge. 
 
@@ -114,7 +115,9 @@ This project stands in stark contrast to a similar effort undertaken by one of o
 
 With our new LLM-powered approach, we wrote a script that classified every code example across all our properties in about a day. The process could be even faster with more AI compute resources or further optimization. Importantly, this classification is now repeatable with minimal human input, allowing us to focus more on refining the categories and analyzing the results rather than the tedious classification work.
 
-If we were to have trained a classifier model, even just[ fine-tuning a classifier like BERT](https://www.philschmid.de/bert-text-classification-in-a-different-language), it would have been a much more time and effort intensive process that required a deeper knowledge of ML than anyone on the team (myself included) possessed. Realistically, we never would have even undertaken this project if we didn't have LLMs to make it accessible to us. 
+If we were to have trained a classifier model, even just [fine-tuning a classifier like BERT](https://www.philschmid.de/bert-text-classification-in-a-different-language),
+it would have been a much more time and effort intensive process that required a deeper knowledge of ML than anyone on the team (myself included) possessed.
+Realistically, we never would have even undertaken this project if we didn't have LLMs to make it accessible to us. 
 
 Some other potential applications of analytical NLP on knowledge resources include:
 
