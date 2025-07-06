@@ -4,10 +4,10 @@ author: Ben Perlmutter
 pubDatetime: 2024-06-26T00:00:00.000Z
 slug: knowledge-is-the-new-uranium
 featured: false
-draft: true
+draft: false
 tags:
   - generative-ai
-# description: "TODO"
+description: "Exploring how knowledge resources have become the most powerful fuel for generative AI applications, from RAG chatbots to model training datasets."
 ---
 
 > *This post is based on a conference talk I gave at the AI Engineer World's Fair in June 2024. Find more details about the talk [here](./knowledge-is-the-new-uranium-talk.md).*
@@ -28,9 +28,9 @@ Some practical examples of knowledge resources include public and internal docum
 
 The rise of large language models (LLMs) and their ability to understand and reason over vast amounts of information has made knowledge an extraordinarily valuable asset in the generative AI era. LLMs can use knowledge resources to generate intelligent outputs, make decisions, take actions, and produce more knowledge resources.
 
-For many organizations, [[Retrieval-Augmented Generation|retrieval-augmented generation (RAG)]] chatbots have been the first generative AI use case to leverage their knowledge resources like documentation and code repositories. I've focused on for the past year and change on the RAG chatbot space, working on projects like the [[MongoDB Docs Chatbot]] and the [[MongoDB Chatbot Framework]].
+For many organizations,retrieval-augmented generation (RAG) chatbots have been the first generative AI use case to leverage their knowledge resources like documentation and code repositories. I've focused on for the past year and change on the RAG chatbot space, working on projects like the [MongoDB Docs Chatbot](./taking-rag-to-production-with-the-mongodb-documentation-ai-chatbot.md) and the [MongoDB Chatbot Framework](./build-a-production-ready-intelligent-chatbot-with-the-mongodb-chatbot.md).
 
-RAG chatbots are great, and [[Why Chat is the Best Interface for LLMs (for now?)|I think they'll continue to be important for the foreseeable future]].  But knowledge resources can fuel so much more than just RAG chatbots.
+RAG chatbots are great, and [I think they'll continue to be important for the foreseeable future](./why-chat-is-the-best-interface-for-llms-for-now.md).  But knowledge resources can fuel so much more than just RAG chatbots.
 
 This blog post explores the currently possible use cases for knowledge resources, all of which we are currently doing at MongoDB, including:
 
@@ -64,9 +64,9 @@ Next, let's take a look at some ways that you can currently use your knowledge r
 
 ### More RAG Chatbots
 
-Chatbots seem to be the dominant interface for leveraging knowledge resources with generative AI at the moment. Chatbots are great for providing relatively high value for relatively low effort. In a previous blog post, [[Why Chat is the Best Interface for LLMs (for now?)]], I explored why I think chatbots work so well right now.
+Chatbots seem to be the dominant interface for leveraging knowledge resources with generative AI at the moment. Chatbots are great for providing relatively high value for relatively low effort. In a previous blog post, [Why Chat is the Best Interface for LLMs (for now?)](./why-chat-is-the-best-interface-for-llms-for-now.md), I explored why I think chatbots work so well right now.
 
-With the right chatbot infrastructure, you can probably drive 10s of percents of productivity gain in most knowledge work tasks by giving someone an AI chatbot using a GPT-4+ tier model with a good system prompt and knowledge retrieval system. At MongoDB, we've started using a tool called [Credal.ai](https://www.credal.ai/) for internal chatbot with promising initial results. [[Exploring Custom GPTs|ChatGPT's custom GPTs]] are another tool for quickly spinning up custom LLM chatbots.
+With the right chatbot infrastructure, you can probably drive 10s of percents of productivity gain in most knowledge work tasks by giving someone an AI chatbot using a GPT-4+ tier model with a good system prompt and knowledge retrieval system. At MongoDB, we've started using a tool called [Credal.ai](https://www.credal.ai/) for internal chatbot with promising initial results. [ChatGPT's custom GPTs](./exploring-custom-gpts.md) are another tool for quickly spinning up custom LLM chatbots.
 
 It doesn't really make sense to have a single centralized team create all the chatbots for an organization, given that:
 
@@ -106,7 +106,7 @@ All of these are examples of in-product features where combining knowledge with 
 
 You can also use your knowledge resources for analytical natural language processing (NLP) like classification and sentiment analysis. Many of these analytical NLP tasks were possible before LLMs using traditional AI models and non-AI NLP, but these approaches require more specialized knowledge and development time to perform. LLMs turn these into matters of straightforward prompt engineering. 
 
-At MongoDB, we recently conducted a "[[Skunkworks]]" hackathon project to analyze our code examples for various forms of bias, like being Western-centric or perpetuating stereotypes. We used a GPT-3.5 model as a classifier, which allowed us to quickly categorize examples without having to fine-tune a pre-trained model or go through the entire model training process from scratch.
+At MongoDB, we recently conducted a "Skunkworks" hackathon project to analyze our code examples for various forms of bias, like being Western-centric or perpetuating stereotypes. We used a GPT-3.5 model as a classifier, which allowed us to quickly categorize examples without having to fine-tune a pre-trained model or go through the entire model training process from scratch.
 
 Unfortunately, I cannot share the source code as it's in a private repo.  On a high level, the approach was to create a few-shot, chain-of-thought classifier function.
 
@@ -127,146 +127,153 @@ By applying LLMs to these analytical tasks, organizations can extract valuable i
 
 ### Model Training Datasets
 
-AI_TODO: create a section with this content. emulate the style of the previous sections closely.
-- Foundational model unsupervised pretraining
-	- give it your text
-- generate prompt/completions based on your data using an LLM
-	- use with LoRA
-	- convert raw knowledge text to question and answer pairs that cover the knowledge in that text
-	- can use Evol-Instruct-style techniques to create variety of different prompt completions of varying complexity
-		- Evol-Instruct technique from the WizardLM paper - https://arxiv.org/abs/2304.12244 (link to this)
-	- heard that approx fine-tuning on 1 billion tokens with LoRA can yield meaningful model improvements
-		- i don't have a study to cite here. but this was a number that i got from both a Solutions Architect at a very big company and also ML engineer at a company developing and hosting models.
+You can also transform your knowledge resources into datasets for training and fine-tuning AI models. This goes beyond simply feeding raw text to models. You can use LLMs themselves to create synthetic training datasets from your existing knowledge.
+
+#### Foundational Model Pretraining
+
+The most straightforward approach is to include your curated knowledge text in the unsupervised pretraining of foundational models. This involves feeding your normalized, cleaned knowledge directly to the model during training, allowing it to learn patterns and information specific to your domain.
+
+At MongoDB, we've shared our documentation dataset on HuggingFace specifically so that model developers can include it in their training pipelines. This means future models will have better inherent understanding of MongoDB concepts and terminology.
+
+#### Generated Prompt-Completion Pairs
+
+More sophisticated approaches involve using LLMs to generate structured training data from your knowledge resources. Instead of just dumping raw text into a model, you can convert knowledge into question-answer pairs, tutorials, code examples, and other formats that models can learn from more effectively.
+
+The process works by taking chunks of your knowledge and using an LLM to generate various prompt-completion pairs that cover the material. For example, you might take a technical documentation page and generate:
+- Questions about the concepts with detailed answers
+- Code examples with explanations
+- Troubleshooting scenarios with solutions
+- Comparison prompts highlighting differences between related topics
+
+You can use techniques like [Evol-Instruct](https://arxiv.org/abs/2304.12244) from the WizardLM paper to create prompt completions of varying complexity. This technique systematically makes prompts more challenging by adding constraints, requiring multi-step reasoning, or incorporating edge cases.
+
+This generated data works particularly well with LoRA (Low-Rank Adaptation) fine-tuning, which lets you efficiently adapt large models to your specific domain without the computational cost of full fine-tuning. From conversations with folks working in the space, I've heard that fine-tuning on approximately 1 billion tokens with LoRA can yield meaningful model improvements, though this obviously depends on your specific use case and data quality.
+
+The beauty of this approach is that once you've built the pipeline to generate training data from your knowledge, you can easily scale it up or refresh it as your knowledge base evolves.
 
 ### Evaluation Datasets
 
-- for testing foundational model and AI system performance
-- variety of different techniques possible
-- create large set of multiple choice questions
-	- again could use Evol-Instruct-style technique to create questions of varying difficulties.
-	- Create your own version of multiple-choice based benchmarks like [MMLU](https://paperswithcode.com/dataset/mmlu)
-- Create just questions, or questions and model answer/success criterial
-	- use Ragas-style evaluation metrics to determine 
-		- link to https://docs.ragas.io/en/stable/concepts/metrics/index.html
-- use to inform things like:
-	- what foundational model to use
-	- RAG chatbot performance
-		- can be used for fine-tuning as well
+Knowledge resources are also incredibly valuable for creating evaluation datasets to test foundational model and AI system performance. Rather than relying solely on generic benchmarks, you can create domain-specific evaluations that directly measure how well AI systems understand and work with your specific knowledge.
 
-### Knowledge Graphs (A  Hand-Wavey Mention)
+#### Custom Multiple-Choice Benchmarks
 
-- TODO: outline
+One approach is to generate large sets of multiple-choice questions from your knowledge base. You can create your own version of well-known benchmarks like [MMLU](https://paperswithcode.com/dataset/mmlu), but tailored to your domain. 
+
+For example, at MongoDB, we could create a comprehensive evaluation set covering database concepts, query syntax, best practices, and troubleshooting scenarios. Using the same Evol-Instruct-style techniques mentioned earlier, you can create questions of varying difficulties - from basic concept recognition to complex multi-step reasoning problems.
+
+#### Open-Ended Question Evaluation
+
+Beyond multiple choice, you can generate open-ended questions paired with success criteria or reference answers. This allows for more nuanced evaluation of model reasoning and explanation capabilities.
+
+You can use evaluation frameworks like [Ragas](https://docs.ragas.io/en/stable/concepts/metrics/index.html) to automatically assess the quality of responses along multiple dimensions like faithfulness, relevance, and completeness. This approach works particularly well for evaluating RAG systems, since you can measure both retrieval quality and generation quality.
+
+**Practical Applications**
+
+These domain-specific evaluation datasets serve multiple purposes:
+
+- **Model selection**: Compare how different foundational models perform on your specific use cases before committing to one
+- **RAG system optimization**: Systematically test different retrieval strategies, prompt engineering approaches, and model configurations
+- **Fine-tuning guidance**: Use evaluation results to inform what areas need improvement through additional training
+- **Production monitoring**: Continuously assess system performance as your knowledge base and use cases evolve
+
+The key advantage of knowledge-derived evaluation datasets is that they test what actually matters for your use case, rather than generic capabilities that may not translate to your specific domain. This gives you much more confidence that improvements on the benchmark will translate to real-world performance gains.
+
+### Knowledge Graphs (A Hand-Wavey Mention)
+
+I'd be remiss if I didn't mention knowledge graphs as another way to leverage your knowledge resources, though I'll admit this is the area I'm least familiar with in practice.
+
+Knowledge graphs represent information as interconnected entities and relationships, allowing AI systems to understand not just individual pieces of knowledge but how they relate to each other. Instead of treating your documentation as isolated chunks of text, you can extract entities (like "MongoDB", "aggregation pipeline", "index") and their relationships ("uses", "requires", "optimizes") to create a structured representation of your knowledge.
+
+This structured approach can enhance RAG systems by providing more contextual retrieval. Instead of just finding documents that mention "aggregation pipelines," you could retrieve related concepts like "indexes that optimize aggregation performance" or "common aggregation patterns for time-series data."
+
+LLMs can actually help you create knowledge graphs by extracting entities and relationships from your existing documentation, though the quality and consistency of extraction remains a challenge. Some organizations are experimenting with hybrid approaches that combine knowledge graphs with 'traditional RAG' (in as much a technique so new can be considered *traditional*), to get both structured relationship understanding and flexible text-based retrieval.
+
+While knowledge graphs represent an interesting direction for knowledge utilization, I suspect most organizations will see more immediate value from the other approaches covered in this post. Knowledge graphs require additional infrastructure and expertise that may not be justified unless you have very complex, highly interconnected knowledge domains.
+
 ## Knowledge Nukes and Meltdowns: Does the Metaphor Get Scary?
-  
-- Acknowledge the potential dangers of the uranium metaphor
-    - Uranium can be used for destructive purposes, like nuclear weapons
-    - Nuclear power plants can have catastrophic meltdowns if not properly managed
-    - Similarly, knowledge resources and generative AI could be misused or have unintended consequences
+
+If we're going to stick with the uranium metaphor, we should acknowledge that uranium can be dangerous. It can power nuclear weapons and nuclear power plants can have catastrophic meltdowns if not properly managed. Similarly, knowledge resources combined with generative AI could be misused or lead to unintended consequences.
 
 ### Knowledge Nukes
 
-- What is a knowledge nuke?
-	- using knowledge resources with generative AI for offensive purposes
-	- for example, exfiltrate sensitive information from a knowledge repository or using generative ai tools powered by the knowledge resource
-	- examples
-		- use your knowledge base and LLM to create disinformation related to the subject matter. 
-- frankly, right now i think the risk of offensive use of knowledge resources is limited. but that might be a function of:
-	- my failure of imagination 
-	- generative ai technologies not being powerful enough for major offensive capabilities unlocks for knowledge resources
-		- worth monitoring as LLMs and other generative AI technologies become more advanced 
+What would a "knowledge nuke" look like? This would involve using knowledge resources with generative AI for offensive purposes - essentially weaponizing your knowledge infrastructure.
+
+One example might be using your knowledge base and LLM to create sophisticated disinformation related to your subject matter. If you have a comprehensive medical knowledge base, for instance, a bad actor could potentially use it to generate convincing but false medical advice or conspiracy theories.
+
+Frankly, I think the current risk of offensive use of knowledge resources is relatively limited. This might be due to my failure of imagination, or it could be that generative AI technologies aren't yet powerful enough to unlock major offensive capabilities from knowledge resources. But this is definitely worth monitoring as LLMs and other generative AI technologies become more advanced and capable.
 
 ### Knowledge Meltdowns
 
-- What is a knowledge meltdown?
-	- unintentional leakage of knowledge resources that have negative consequences
-- forms: (one short paragraph for each)
-	- direct access to knowledge, say by someone who shouldn't getting access to knowledge repository with sensitive data 
-	- accidentally exposing sensitive knowledge to parties who shouldn't receive it through a generative AI interface like a RAG chatbot. 
-		- example: an internal HR chatbot exposes all the company's salary information when prompted correctly
-	- accidentally including sensitive information in training data for an AI model
-		- then if model prompted correctly, could reveal that sensitive knowledge
-		- ex: if you included the source code for private repositories in  training data for LLM. then could be revealed with correct end-user prompting. 
-	- AI_TODO: wrap up in a short paragraph..~2 sentences
+A "knowledge meltdown" would be the unintentional leakage of knowledge resources that leads to negative consequences. This can happen in several ways:
+
+1. **Direct access breaches** occur when someone who shouldn't have access gains entry to your knowledge repository containing sensitive data. This is the traditional information security concern, but centralized knowledge repositories can make the blast radius larger.
+2. **Accidental exposure through AI interfaces** is a newer concern. For example, an internal HR chatbot might expose all the company's salary information when prompted correctly, or a customer support bot might leak competitive intelligence when cleverly questioned.
+3. **Training data contamination** happens when sensitive information accidentally gets included in training data for an AI model. If you included source code from private repositories in training data for an LLM, that code could potentially be revealed through the right end-user prompting techniques.
+
+These risks are real but manageable with proper security practices. The key is being intentional about what knowledge you centralize and expose to AI systems.
+
 ### Secure Use of Knowledge
 
-- Discuss the importance of responsible development and deployment
-    - Just as nuclear technology requires strict safety protocols and oversight, generative AI and knowledge management need proper guidelines and governance
-    - Organizations must prioritize security, privacy when working with knowledge resources and AI
-	    - apply the same information security practices that would to any data plus additional generative AI considerations
-		    - for example, have to worry about prompt injection
-    - Especially, as we are only entering the generative AI era, we should be mindful with the knowledge resources we expose and utilize. 
-- Safest thing you can do is not ingest knowledge that you don't want to be leaked
-	- Just as safest thing you can do with uranium is to leave it in the ground
+Just as nuclear technology requires strict safety protocols and oversight, generative AI and knowledge management need proper guidelines and governance. Organizations must prioritize security and privacy when working with knowledge resources and AI.
 
-- At my team at MongoDB, we only touch public facing data
-	- our team only uses public information, so even our knowledge repository were to be leaked, all you'd get is a cleaner version of that which you can already find in various forms on the web.
-	- to be sure, it'd save some labor
-		- e.g. wouldn't need to cleanly scrape web pages or transcribe some videos, but that's the extent of it
+This means applying the same information security practices you'd use for any sensitive data, plus additional generative AI considerations like prompt injection attacks. Since we're only entering the generative AI era, we should be particularly mindful about which knowledge resources we expose and utilize.
 
-- Another approach is to just load sensitive data into context at run time.
-	- don't store this knowledge in a separate location at rest in an ingested data repository. 
-	- less performant, and could limit number of things that you do with the knowledge resource, but that can be a feature not a bug. 
-	- for example, say you wanted to learn about an business plan document. you could load that knowledge into a chat interface and chat with it there. 
-- a related intermediate approach is to only store metadata about sensitive knowledge  
+Just as the safest thing to do with uranium is to leave it in the ground, it is safest to not ingest knowledge that you don't want to be leaked.
 
-- Highlight the positive potential of knowledge resources and generative AI
-    - Despite the risks, nuclear technology has also brought significant benefits, such as clean energy and medical advances
-    - Similarly, knowledge resources and generative AI have the potential to solve complex problems, enhance creativity, and improve people's lives
-    - With proper safeguards and responsible development, the benefits can outweigh the risks
+At my team at MongoDB, we only work with public-facing data. Even if our knowledge repository were to be completely compromised, all you'd get is a cleaner version of information you can already find on the web in various forms. Sure, it'd save some labor (you wouldn't need to scrape web pages or transcribe videos), but that's the extent of the damage.
+
+Another approach for sensitive data is to load it into context at runtime rather than storing it in a permanent knowledge repository. This is less performant and limits what you can do with the knowledge resource, but that constraint can be a feature rather than a bug. For example, if you want to analyze a confidential business plan document, you could load it into a chat interface temporarily rather than permanently ingesting it.
+
+A related intermediate approach is to store only metadata about sensitive knowledge - enough to know it exists and how to retrieve it, but not the actual content.
+
+Despite these risks, we shouldn't lose sight of the tremendous positive potential. Nuclear technology, despite its dangers, has brought significant benefits like clean energy and medical advances. Similarly, knowledge resources and generative AI have the potential to solve complex problems, enhance creativity, and improve people's lives. With proper safeguards and responsible development, the benefits outweigh the risks.
 
 ## The Knowledge Service
 
-- A service for interacting with knowledge resources 
-	- probably can take the form of a RESTful HTTPS APIin most circumstances 
-- this idea follows the principles of service-oriented architecture (SOA)
-	- the core idea of service oriented architecture, per AWS documentation, is that: "Each service provides a business capability, and services can also communicate with each other across platforms and languages."
-	- before the rise of LLMs, there wasn't necessarily a compelling need to consolidate knowledge resources in a service. 
-		- who would use it and for what? 
-		- knowledge had been primarily a resource for *humans* to consume 
-		- but now we have *machine* users
-			- LLM powered systems
-			- the training of AI models 
-		- services helps accommodate the AI-powered machine use cases and facilitate human developers building these systems
-			- same idea as how an organization might have a billing service that different teams could use for handling payments for different products
-			- now knowledge consumption a use case 
-- Knowledge API functionality includes
-	- get content from the knowledge service by resource identifiers
-		- ex: get all web pages' content by site
-		- get single web page content by URL
-	- robust search and query functionality 
-		- find content even if you don't know where it exists
-			- could be used to get chunks / more LLM-actionable forms of knowledge or complete knowledge resources 
-	- also could include generative AI functionality within the knowledge service itself. for example, have a chat endpoint that let's users get natural language responses to their queries, perhaps based on RAG or specialized models. 
-		- i did a prototype of this for the latest skunkworks hackathon. didn't thoroughly evaluate, but based on trying a few queries, it worked quite well. 
-- Secure with API security best practices 
-	- role-based access control (RBAC) for any sensitive information
-	- prevent abuse with rate limits and authentication 
-	- leverage all the other API security techniques and infrastructure that the software industry has developed over the past decades
-- AI_TODO: conclusion paragraph. short. ~2 sentences
+All of the use cases we've discussed point toward a logical conclusion: creating a centralized knowledge service for your organization. This would be a service specifically designed for interacting with knowledge resources. It would probably take the form of a RESTful HTTPS API in most circumstances.
+
+This idea follows the principles of service-oriented architecture (SOA), applied to this new domain of LLMs and knowledge resources. According to the [AWS documentation](https://aws.amazon.com/what-is/service-oriented-architecture/), the core idea of SOA is that "each service provides a business capability, and services can also communicate with each other across platforms and languages."
+
+Before the rise of LLMs, there wasn't necessarily a compelling need to consolidate knowledge resources in a service. Who would use it and for what? Knowledge had been primarily a resource for *humans* to consume through websites and documentation portals.
+
+But now we have *machine* users in the form of LLM-powered systems and AI model training pipelines. A knowledge service helps accommodate these AI-powered use cases while facilitating human developers to build on top of these systems. It's the same idea as how an organization might have a billing service that different teams use for handling payments across different products. Now knowledge consumption is a similar cross-cutting concern.
+
+**Core Knowledge API Functionality**
+
+A knowledge service should include several key capabilities:
+
+1. **Resource retrieval** by identifiers (get all web pages' content by site, get single web page content by URL)
+2. **Robust search and query functionality** to find content even when you don't know exactly where it exists. This could return either chunks optimized for LLM consumption or complete knowledge resources
+3. **Generative AI endpoints** built into the service itself, like a chat endpoint that provides natural language responses to queries using RAG or specialized models (I prototyped this for our latest skunkworks hackathon and it worked quite well, though I didn't evaluate it thoroughly)
+
+You'd secure this with standard API security best practices: role-based access control (RBAC) for sensitive information, rate limits and authentication to prevent abuse, and all the other API security techniques the software industry has developed over the past decades.
+
+A centralized knowledge service could become the foundation for all knowledge-powered AI initiatives across an organization, avoiding duplication and ensuring consistency.
 
 ### Empower Builders
 
-- teams who want to work with the knowledge just need to know the interface and have appropriate access
-- then can do as wish, either programmtically or in batches
-- building for future where AI deeply integrated in many parts of products and workflows
-	- and as more developers have more experience thinking in AI-first way
-	- example:
-		- content generation scripts that my coworked Nick wrote
-			- these scripts create drafts of MongoDB driver documentation for languages where we have less robust documentation, based on languages where we do have more robust documentation. 
-				- such as creating a full documentation set for the minimally-documented Java Reactive Streams driver  based on the documentation for the fully-documented Node.js driver.
-			- you can access the scripts here - https://github.com/mongodb/chatbot/tree/main/packages/mongodb-artifact-generator 
-		- no reason that anyone shouldn't be able to do that
-		- while nick a senior software engineer with knowledge of AI tools was able to do, maybe there's a future user who is only minimally technical could work with an LLM-powered system to make
-- also use the knowledge service to integrate into 3rd-party AI platforms, like ChatGPT or Github Copilot. 
-	- both of these already have support for 3rd-party integrations, [custom GPTs for ChatGPT](https://openai.com/index/introducing-gpts/) and [Extensions for Github Copilot](https://github.blog/2024-05-21-introducing-github-copilot-extensions/).
-	- create a light wrapper around a knowledge API to make integration easy and not duplicative across integrations
+The power of a knowledge service is that teams who want to work with knowledge only need to understand the interface and have appropriate access. This approach prepares us for a future where AI is deeply integrated into many parts of products and workflows, and where more developers have experience thinking in an AI-first way.
+
+A great example is the content generation scripts that my coworker Nick wrote. These scripts create drafts of MongoDB driver documentation for languages where we have less robust documentation, based on languages where we do have comprehensive docs. For instance, creating a full documentation set for the minimally-documented Java Reactive Streams driver based on the fully-documented Node.js driver. You can see the [scripts here](https://github.com/mongodb/chatbot/tree/main/packages/mongodb-artifact-generator).
+
+There's no reason anyone shouldn't be able to do similar work. While Nick is a senior software engineer with knowledge of AI tools, perhaps in the future a less technical user could work with an LLM-powered system to accomplish similar tasks.
+
+You can also use the knowledge service to integrate into third-party AI platforms like ChatGPT or GitHub Copilot. Both already support third-party integrations through [custom GPTs for ChatGPT](https://openai.com/index/introducing-gpts/) and [Extensions for GitHub Copilot](https://github.blog/2024-05-21-introducing-github-copilot-extensions/). You could create a light wrapper around your knowledge API to make these integrations easy and avoid duplicating work across different platforms.
 
 ### Agentic Access
 
-- talk about how agents could access this knowledge to perform tasks
-- TODO: flush this out
+Looking forward, AI agents will likely become major consumers of knowledge services. As agents become more sophisticated, they'll need access to up-to-date, authoritative information to perform complex tasks on users' behalf.
+
+Imagine an AI agent helping with customer onboarding that can access your product documentation, troubleshooting guides, and best practices to provide comprehensive support. Or a development agent that can reference your internal architecture decisions, coding standards, and past incident reports to make better recommendations.
+
+As agentic capabilities improve, your knowledge infrastructure is already positioned to support these new use cases without requiring major architectural changes.
 
 ## Conclusion
 
-AI_TOOD: how to wrap up
-tie back to the new uranium idea
+Just as uranium unlocked unprecedented energy potential in the 20th century, knowledge resources are poised to fuel the AI-powered innovations of the 21st century. We're witnessing the early stages of this transformation, where curated, contextualized knowledge becomes increasingly valuable.
+
+The use cases covered in this blog post--from RAG chatbots and in-product experiences to model training datasets and analytical NLP--represent just the beginning of a new paradigm. As AI capabilities continue advancing, the organizations that have invested in properly mining, refining, and centralizing their knowledge resources will have a significant competitive advantage.
+
+The path forward requires both ambition and caution. Start by experimenting with knowledge-powered AI applications in low-risk environments. Build the infrastructure to centralize and standardize your knowledge resources. Create the security practices and governance frameworks to handle knowledge responsibly. And design systems with service-oriented architecture principles that can scale as AI capabilities mature.
+
+Most importantly, begin treating knowledge resources as a strategic asset. In the generative AI era, knowledge is the new uranium. It is a resource so powerful it can transform entire industries, but one that demands careful handling and thoughtful application.
