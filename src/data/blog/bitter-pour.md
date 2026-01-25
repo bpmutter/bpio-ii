@@ -1,5 +1,5 @@
 ---
-title: "Bitter Pour"
+title: "Bitter Pour (Fiction)"
 author: Ben Perlmutter
 pubDatetime: 2026-01-25T00:00:00.000Z
 slug: bitter-pour
