@@ -5,7 +5,7 @@ title: "About"
 
 I work at the intersection of software development and technical communication.
 
-Currently, I'm working as a Senior Software Engineer at MongoDB. I build generative AI products that teach developers about MongoDB and accelerate our internal content creation workflow.
+Currently, I'm working as a Senior Software Engineer at MongoDB. I work on the MongoDB Assistant, an API that lets developers learn about MongoDB and interact with our products through AI interfaces.
 
 Previously, I worked on documenting the Realm mobile database, Atlas App Services, and led the creation of documentation for the Kotlin Driver.
 
@@ -18,5 +18,3 @@ Prior to working in tech, I taught English in Seoul, South Korea and Cuenca, Ecu
 ## AFK 
 
 When I’m not hunched in front of my computer coding or writing (though that is most of my life these days), I like to read, practice yoga (which I actually started to compensate for the back pain that all the keyboard hunching was causing, and have grown to quite like it, but I digress…), hang out with my friends, and get off the beaten path.
-
-I’m also a passionate traveler and devoted believer in remote work. I have just returned to my native New York, but have spent the previous 4+ years living and working abroad.
