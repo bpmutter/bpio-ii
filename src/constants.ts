@@ -98,16 +98,16 @@ export const CORE_COMPETENCIES: CoreCompetency[] = [
     image: ReadingImage,
   },
   {
-    name: 'Cloud Computing',
-    image: CloudImage,
-  },
-  {
     name: 'Generative AI',
     image: RobotImage,
   },
   {
     name: 'Technical Writing',
     image: TechnicalWriting,
+  },
+  {
+    name: 'Cloud Computing',
+    image: CloudImage,
   },
 ]
 
